@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        /* .btn{ 
+            padding: 10px 60px;
+            text-align: center;
+            background: #fff;
+            border: 0px;
+            outline: none;
+            cursor: pointer;
+            position: absolute;
+             padding: 0 30px 30px;}   */
+
+
+        .container{
+            width: 100%;
+            height: 100vh;
+            background: #3c5077;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .popup{
+            width: 400px;
+            background: #fff;
+            border-radius:  6px;
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            padding: 0 30px 30px;
+            color: #333;
+             /* visibility: hidden;  */
+            transition: tranform0.4s,top 0.4s;
+        }
+
+       /* .openpopup{ */
+            /* visibility: visible; */
+            /* top: 50%; */
+            /* transform: translate(-50%,-50%) scale(0.1); */
+        /* } */
+        .popup img{
+            width:  100px;
+            margin-top: -50px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0, 0.2);
+        }
+        .popup h2 {
+            font-size: 40px;
+            font-weight: 500;
+            margin: 30px 0 10 px;
+
+        }
+        a{
+            text-decoration: none;
+        }
+        .popup button{
+            width: 100%;
+            margin-top: 50px;
+            padding: 10px 0 ;
+            background: #6fd649;
+            color:#fff;
+            border:0;
+            outline: none;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow:0 5px 5px rgba(0,0,0, 0.2);
+            
+
+        }
+
+    
+    </style>
+    <body>
+    <div class="container"></div>
+    <!-- <button type="submit" onclick="openpopup()" class="btn">submit</button>  -->
+    <div class="popup" id="popup">
+        <img src="data:image/png;base64,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"alt="tick">
+        <h2>Thank you for getting in touch!!</h2>
+        <p>We appreciate you contacting DHRUV TOUR & TRAVELS. One of our colleagues will get back in touch with you soon!Have a great day!</p>
+        
+        <button type="button"><a href="md.html">okay</button>
+
+    </div>
+    <script src="pop.js">
+        // let popup = document.getElementById("popup");
+        // function openpopup(){
+            // popup.classList.add("open-popup");
+        // }
+        // function closepopup(){
+            
+    </script>
+</body>
+</html>
+
+
